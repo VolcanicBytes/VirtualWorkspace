@@ -1,0 +1,102 @@
+{
+	"name": "virtual-space",
+	"displayName": "Virtual Space",
+	"description": "Group unrelated files together in virtual workspaces",
+	"publisher": "VolcanicBytes",
+	"icon": "media/icon_256.png",
+	"version": "0.0.1",
+	"repository": {
+		"url": "https://github.com/VolcanicBytes/virtualSpace",
+		"type": "git"
+	},
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:virtualSpace.saveAs",
+		"onCommand:virtualSpace.restore",
+		"onLanguage:virtualSpace"
+	],
+	"galleryBanner": {
+		"color": "#e7c246",
+		"theme": "light"
+	},
+	"main": "./dist/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "virtualSpace.saveAs",
+				"title": "Save Workspace As...",
+				"category": "VirtualSpace"
+			},
+			{
+				"command": "virtualSpace.restore",
+				"title": "Restore",
+				"category": "VirtualSpace"
+			},
+			{
+				"command": "virtualSpace.removeFileFromCurrentList",
+				"title": "Remove file from current list",
+				"category": "VirtualSpace"
+			},
+			{
+				"command": "virtualSpace.addFileToCurrentList",
+				"title": "Add file to current list",
+				"category": "VirtualSpace"
+			},
+			{
+				"command": "virtualSpace.cancelSave",
+				"title": "Cancel Save",
+				"category": "VirtualSpace"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "virtualSpace.cancelSave",
+					"when": "never"
+				},
+				{
+					"command": "virtualSpace.addFileToCurrentList",
+					"when": "virtualSpaceIsOpen"
+				},
+				{
+					"command": "virtualSpace.removeFileFromCurrentList",
+					"when": "virtualSpaceIsOpen"
+				}
+			]
+		},
+		"languages": [
+			{
+				"id": "virtualSpace",
+				"aliases": [
+					"Virtual WorkSpace",
+					"VirtualSpace"
+				],
+				"extensions": [
+					"code-virtualspace"
+				]
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "webpack --mode production",
+		"webpack": "webpack --mode none",
+		"webpack-dev": "webpack --mode none --watch",
+		"postinstall": "node ./node_modules/vscode/bin/install"
+	},
+	"devDependencies": {
+		"@types/mocha": "^5.2.7",
+		"@types/node": "^12.12.18",
+		"ts-loader": "^6.2.1",
+		"tslint": "^5.20.1",
+		"typescript": "^3.7.3",
+		"vscode": "^1.1.36",
+		"webpack": "^4.44.2",
+		"webpack-cli": "^3.3.12"
+	},
+	"dependencies": {}
+}
