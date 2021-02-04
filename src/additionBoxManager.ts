@@ -1,12 +1,12 @@
 import * as vscode from 'vscode';
 import { Constants } from './constants';
-import { VirtualSpace } from './virtualSpace';
+import { VirtualWorkspace } from './virtualWorkspace';
 
 export class AdditionBoxProxy {
-    public virtualSpace: VirtualSpace;
+    public virtualWorkspace: VirtualWorkspace;
 
-    constructor(virtualSpace: VirtualSpace) {
-        this.virtualSpace = virtualSpace;
+    constructor(virtualWorkspace: VirtualWorkspace) {
+        this.virtualWorkspace = virtualWorkspace;
     }
 
     /**
@@ -17,21 +17,21 @@ export class AdditionBoxProxy {
         const removeResponse = Constants.RemoveFileFromListResponse;
         const response = await vscode.window.showInformationMessage(message, 'Ok', addResponse, removeResponse);
         if (response == addResponse) {
-            this.virtualSpace.AddActiveEditorToCurrentList();
+            this.virtualWorkspace.AddActiveEditorToCurrentList();
         }
         else if (response == removeResponse) {
-            this.virtualSpace.RemoveActiveEditorFromCurrentList();
+            this.virtualWorkspace.RemoveActiveEditorFromCurrentList();
         }
     }
 
     public async DisplayRestoredList(list: string[]) {
-        let message = `VirtualSpace restored list of ${list.length} files: `;
+        let message = `VirtualWorkspace restored list of ${list.length} files: `;
         message = this.appendListToMessage(list, message);
         await this.ShowMessage(message);
     }
 
     public async DisplaySavedList(list: string[]) {
-        let message = `VirtualSpace saved list of ${list.length} files: `;
+        let message = `VirtualWorkspace saved list of ${list.length} files: `;
         message = this.appendListToMessage(list, message);
         await this.ShowMessage(message);
     }

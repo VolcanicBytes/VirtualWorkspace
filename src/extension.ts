@@ -1,33 +1,33 @@
 import * as vscode from 'vscode';
 import { Constants } from './constants';
 import { StatusBar } from './statusbarProxy';
-import { VirtualSpace } from './virtualSpace';
+import { VirtualWorkspace } from './virtualWorkspace';
 
 export function activate(context: vscode.ExtensionContext) {
 	StatusBar.InitializeStatusBar();
-	const virtualSpace: VirtualSpace = new VirtualSpace();
+	const virtualWorkspace: VirtualWorkspace = new VirtualWorkspace();
 	context.subscriptions.push(
-		vscode.commands.registerCommand(Constants.VirtualSpace_SaveAsCommand, () => {
-			virtualSpace.BeginSaveAs();
+		vscode.commands.registerCommand(Constants.VirtualWorkspace_SaveAsCommand, () => {
+			virtualWorkspace.BeginSaveAs();
 		}),
-		vscode.commands.registerCommand(Constants.VirtualSpace_RestoreCommand, () => {
-			virtualSpace.Restore();
+		vscode.commands.registerCommand(Constants.VirtualWorkspace_RestoreCommand, () => {
+			virtualWorkspace.Restore();
 		}),
-		vscode.commands.registerCommand(Constants.VirtualSpace_AddFileCommand, () => {
-			virtualSpace.AddActiveEditorToCurrentList();
+		vscode.commands.registerCommand(Constants.VirtualWorkspace_AddFileCommand, () => {
+			virtualWorkspace.AddActiveEditorToCurrentList();
 		}),
-		vscode.commands.registerCommand(Constants.VirtualSpace_RemoveFileCommand, () => {
-			virtualSpace.RemoveActiveEditorFromCurrentList();
+		vscode.commands.registerCommand(Constants.VirtualWorkspace_RemoveFileCommand, () => {
+			virtualWorkspace.RemoveActiveEditorFromCurrentList();
 		}),
-		vscode.commands.registerCommand(Constants.VirtualSpace_CancelSaveCommand, () => {
-			virtualSpace.CancelSaveAs();
+		vscode.commands.registerCommand(Constants.VirtualWorkspace_CancelSaveCommand, () => {
+			virtualWorkspace.CancelSaveAs();
 		}),
 		vscode.window.onDidChangeActiveTextEditor((e) => {
-			virtualSpace.Update(e);
+			virtualWorkspace.Update(e);
 		})
 	);
 
-	virtualSpace.CheckActiveEditorForVirtualSpace();
+	virtualWorkspace.CheckActiveEditorForVirtualWorkspace();
 }
 
 export function deactivate() { }

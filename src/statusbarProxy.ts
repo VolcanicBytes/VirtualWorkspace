@@ -5,7 +5,7 @@ export class StatusBar {
 
     public static InitializeStatusBar() {
         this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
-        this.statusBarItem.command = Constants.VirtualSpace_CancelSaveCommand;
+        this.statusBarItem.command = Constants.VirtualWorkspace_CancelSaveCommand;
         this.statusBarItem.tooltip = Tooltips.CancelTip;
         this.statusBarItem.text = Constants.Statusbar_SaveText;
         this.Hide();

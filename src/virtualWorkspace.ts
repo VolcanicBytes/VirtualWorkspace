@@ -7,7 +7,7 @@ import { DocumentInfo } from './model/documentInfo';
 import { StatusBar } from './statusbarProxy';
 import { Watchdog } from './watchdog';
 
-export class VirtualSpace {
+export class VirtualWorkspace {
 
     private destinationPath: string = "";
     private dataAccess: DataAccessLayer = new DataAccessLayer();
@@ -27,15 +27,15 @@ export class VirtualSpace {
     }
 
     /**
-     * CheckActiveEditorForVirtualSpace
+     * CheckActiveEditorForVirtualWorkspace
      */
-    public async CheckActiveEditorForVirtualSpace() {
+    public async CheckActiveEditorForVirtualWorkspace() {
         try {
             const textEditor = vscode.window.activeTextEditor;
             if (textEditor == undefined)
                 return;
             const doc = textEditor.document;
-            if (doc == undefined || doc.uri.scheme !== 'file' || doc.languageId !== Constants.VirtualSpace)
+            if (doc == undefined || doc.uri.scheme !== 'file' || doc.languageId !== Constants.VirtualWorkspace)
                 return;
             await this.Restore(doc.uri.fsPath);
         } catch (error) {

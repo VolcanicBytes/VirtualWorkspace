@@ -1,20 +1,21 @@
 export class Constants {
-    public static Extension: string = 'code-virtualspace';
-    public static readonly VirtualSpace = "virtualSpace";
-    public static readonly ContextIsOpen = "virtualSpaceIsOpen";
-    public static readonly VirtualSpace_SaveAsCommand = "virtualSpace.saveAs";
-    public static readonly VirtualSpace_RestoreCommand = "virtualSpace.restore";
-    public static readonly VirtualSpace_AddFileCommand = "virtualSpace.addFileToCurrentList";
-    public static readonly VirtualSpace_RemoveFileCommand = "virtualSpace.removeFileFromCurrentList";
-    public static readonly VirtualSpace_CancelSaveCommand = "virtualSpace.cancelSave";
+    public static Extension: string = 'code-virtualworkspace';
+    public static OldExtension: string = 'code-virtualspace';
+    public static readonly VirtualWorkspace = "virtualWorkspace";
+    public static readonly ContextIsOpen = "virtualWorkspaceIsOpen";
+    public static readonly VirtualWorkspace_SaveAsCommand = "virtualWorkspace.saveAs";
+    public static readonly VirtualWorkspace_RestoreCommand = "virtualWorkspace.restore";
+    public static readonly VirtualWorkspace_AddFileCommand = "virtualWorkspace.addFileToCurrentList";
+    public static readonly VirtualWorkspace_RemoveFileCommand = "virtualWorkspace.removeFileFromCurrentList";
+    public static readonly VirtualWorkspace_CancelSaveCommand = "virtualWorkspace.cancelSave";
     public static readonly CloseAllEditorCommand = "workbench.action.closeAllEditors";
 
     public static readonly Statusbar_SaveText = "Saving virtual space...";
     public static readonly Statusbar_RestoreText = "Restoring virtual space...";
 
     public static QuickPickPlaceHolder: string = 'Select the files to restore (or just hit Enter to load them all)';
-    public static SaveVirtualSpaceLabel: string = 'Save the current virtual workspace';
-    public static RestoreVirtualSpaceLabel: string = 'Restore a virtual workspace';
+    public static SaveVirtualWorkspaceLabel: string = 'Save the current virtual workspace';
+    public static RestoreVirtualWorkspaceLabel: string = 'Restore a virtual workspace';
     public static AddFileToListResponse: string = 'Add active file';
     public static RemoveFileFromListResponse: string = 'Remove active file';
 

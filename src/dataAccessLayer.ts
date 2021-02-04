@@ -27,18 +27,35 @@ export class DataAccessLayer {
      * SaveDocumentInfoList
      */
     public SaveDocumentInfoList(path: string | undefined, list: DocumentInfo[]) {
-        fs.writeFileSync(path!, DocumentInfoSerializer.Serialize(list));
+        let hasOldContent = false;
+
+        try {
+            if (path?.endsWith(Constants.OldExtension)) {
+                hasOldContent = true;
+                const oldPath = path!;
+                const newPath = path.replace(Constants.OldExtension, Constants.Extension);
+                fs.writeFileSync(newPath, DocumentInfoSerializer.Serialize(list));
+                if (fs.existsSync(oldPath))
+                    fs.unlinkSync(oldPath);
+            }
+        } catch (error) {
+            console.log("VirtualWorkspace: can't delete old file: " + error);
+            hasOldContent = false;
+        }
+
+        if (!hasOldContent)
+            fs.writeFileSync(path!, DocumentInfoSerializer.Serialize(list));
     }
 
     public async showOpenDialog() {
-        const fileNames = await window.showOpenDialog({ openLabel: Constants.RestoreVirtualSpaceLabel, filters: { 'virtualSpace': [Constants.Extension] } });
+        const fileNames = await window.showOpenDialog({ openLabel: Constants.RestoreVirtualWorkspaceLabel, filters: { 'virtualWorkspace': [Constants.Extension, Constants.OldExtension] } });
         if (!fileNames)
             return undefined;
         return fileNames[0].fsPath;
     }
 
     public async showSaveDialog() {
-        const fileNames = await window.showSaveDialog({ saveLabel: Constants.SaveVirtualSpaceLabel, filters: { 'virtualSpace': [Constants.Extension] } });
+        const fileNames = await window.showSaveDialog({ saveLabel: Constants.SaveVirtualWorkspaceLabel, filters: { 'virtualWorkspace': [Constants.Extension] } });
         return fileNames ? fileNames.fsPath : undefined;
     }
 }

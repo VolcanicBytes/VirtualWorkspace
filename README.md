@@ -6,12 +6,12 @@ This extension allows you to save all the opened editors into a file, that can b
 
 1) Open a bunch of files from different locations (not under the same folder possibly... for that use native Workspaces instead) within a VSCode instance
    1) You could also create a new file on the fly and type something in it, without save
-2) Run [VirtualSpace: Save Workspace As...](#virtualSpace.saveAs)
+2) Run [VirtualWorkspace: Save Workspace As...](#virtualWorkspace.saveAs)
 3) Close VSCode
 4) Open a folder with VSCode
 5) Close VSCode
 6) Double click the file saved in step (2)
-   1) Or select [VirtualSpace: Restore](#virtualSpace.restore) from the command palette
+   1) Or select [VirtualWorkspace: Restore](#virtualWorkspace.restore) from the command palette
 7) Select the files that you want to restore from the list saved in step (2)
    1) Or just hit <kbd>Enter</kbd> to load them all !
 

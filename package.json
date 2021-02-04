@@ -1,12 +1,12 @@
 {
-	"name": "virtual-space",
-	"displayName": "Virtual Space",
+	"name": "virtual-workspace",
+	"displayName": "Virtual Workspace",
 	"description": "Group unrelated files together in virtual workspaces",
 	"publisher": "VolcanicBytes",
 	"icon": "media/icon_256.png",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"repository": {
-		"url": "https://github.com/VolcanicBytes/virtualSpace",
+		"url": "https://github.com/VolcanicBytes/virtualWorkspace",
 		"type": "git"
 	},
 	"engines": {
@@ -16,9 +16,9 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:virtualSpace.saveAs",
-		"onCommand:virtualSpace.restore",
-		"onLanguage:virtualSpace"
+		"onCommand:virtualWorkspace.saveAs",
+		"onCommand:virtualWorkspace.restore",
+		"onLanguage:virtualWorkspace"
 	],
 	"galleryBanner": {
 		"color": "#e7c246",
@@ -28,56 +28,57 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "virtualSpace.saveAs",
+				"command": "virtualWorkspace.saveAs",
 				"title": "Save Workspace As...",
-				"category": "VirtualSpace"
+				"category": "VirtualWorkspace"
 			},
 			{
-				"command": "virtualSpace.restore",
+				"command": "virtualWorkspace.restore",
 				"title": "Restore",
-				"category": "VirtualSpace"
+				"category": "VirtualWorkspace"
 			},
 			{
-				"command": "virtualSpace.removeFileFromCurrentList",
+				"command": "virtualWorkspace.removeFileFromCurrentList",
 				"title": "Remove file from current list",
-				"category": "VirtualSpace"
+				"category": "VirtualWorkspace"
 			},
 			{
-				"command": "virtualSpace.addFileToCurrentList",
+				"command": "virtualWorkspace.addFileToCurrentList",
 				"title": "Add file to current list",
-				"category": "VirtualSpace"
+				"category": "VirtualWorkspace"
 			},
 			{
-				"command": "virtualSpace.cancelSave",
+				"command": "virtualWorkspace.cancelSave",
 				"title": "Cancel Save",
-				"category": "VirtualSpace"
+				"category": "VirtualWorkspace"
 			}
 		],
 		"menus": {
 			"commandPalette": [
 				{
-					"command": "virtualSpace.cancelSave",
+					"command": "virtualWorkspace.cancelSave",
 					"when": "never"
 				},
 				{
-					"command": "virtualSpace.addFileToCurrentList",
-					"when": "virtualSpaceIsOpen"
+					"command": "virtualWorkspace.addFileToCurrentList",
+					"when": "virtualWorkspaceIsOpen"
 				},
 				{
-					"command": "virtualSpace.removeFileFromCurrentList",
-					"when": "virtualSpaceIsOpen"
+					"command": "virtualWorkspace.removeFileFromCurrentList",
+					"when": "virtualWorkspaceIsOpen"
 				}
 			]
 		},
 		"languages": [
 			{
-				"id": "virtualSpace",
+				"id": "virtualWorkspace",
 				"aliases": [
 					"Virtual WorkSpace",
-					"VirtualSpace"
+					"VirtualWorkspace"
 				],
 				"extensions": [
-					"code-virtualspace"
+					"code-virtualspace",
+					"code-virtualworkspace"
 				]
 			}
 		]
