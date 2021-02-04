@@ -33,7 +33,8 @@ export class DataAccessLayer {
             if (path?.endsWith(Constants.OldExtension)) {
                 hasOldContent = true;
                 const oldPath = path!;
-                const newPath = path.replace(Constants.OldExtension, Constants.Extension);
+                // const newPath = path.replace(Constants.OldExtension, Constants.Extension);
+                const newPath = path.substr(0, path.length - Constants.OldExtension.length) + Constants.Extension;
                 fs.writeFileSync(newPath, DocumentInfoSerializer.Serialize(list));
                 if (fs.existsSync(oldPath))
                     fs.unlinkSync(oldPath);
