@@ -1,4 +1,4 @@
-# Virtual Space
+# Virtual Workspace
 
 This extension allows you to save all the opened editors into a file, that can be restored later.
 
