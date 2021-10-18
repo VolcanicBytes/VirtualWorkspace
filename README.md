@@ -15,6 +15,16 @@ This extension allows you to save all the opened editors into a file, that can b
 7) Select the files that you want to restore from the list saved in step (2)
    1) Or just hit <kbd>Enter</kbd> to load them all !
 
+## Settings
+
+- `virtualWorkspace.remember_last_open_dialog_location` : when enabled, your save & restore commands will re-open in the last opened location
+- `virtualWorkspace.override_open_dialog_location`: if set, your save & restore commands will always be open in this location
+
+
+## Tips
+
+- `virtualWorkspace.saveAs` and	`virtualWorkspace.restore` can accept a location path argument which will override the settings and will open the dialog in this folder
+
 ## Known Issues
 
 > VSCode, at the time this extension was created, didn't provide good support for working with open editors from extension API, so there are some limitations:

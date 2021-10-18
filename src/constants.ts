@@ -10,8 +10,8 @@ export class Constants {
     public static readonly VirtualWorkspace_CancelSaveCommand = "virtualWorkspace.cancelSave";
     public static readonly CloseAllEditorCommand = "workbench.action.closeAllEditors";
 
-    public static readonly Statusbar_SaveText = "Saving virtual space...";
-    public static readonly Statusbar_RestoreText = "Restoring virtual space...";
+    public static readonly Statusbar_SaveText = "Saving virtual workspace...";
+    public static readonly Statusbar_RestoreText = "Restoring virtual workspace...";
 
     public static QuickPickPlaceHolder: string = 'Select the files to restore (or just hit Enter to load them all)';
     public static SaveVirtualWorkspaceLabel: string = 'Save the current virtual workspace';
@@ -23,15 +23,24 @@ export class Constants {
     public static maxNBeginTry: number = 3;
     public static ReTriggerWatchdogDelay: number = 1000;
     public static PreviewFileLength: number = 40;
+
+    public static LastOpenDialogLocation: string = 'VirtualWorkspace.LastOpenDialogLocation';
 }
 export class Tooltips {
     public static readonly CancelTip = 'Click to cancel';
 }
 
 export type BuiltInCommands = 'vscode.open' | 'setContext' | 'workbench.action.closeActiveEditor' | 'workbench.action.nextEditor';
+
 export const BuiltInCommands = {
     CloseActiveEditor: 'workbench.action.closeActiveEditor' as BuiltInCommands,
     NextEditor: 'workbench.action.nextEditor' as BuiltInCommands,
     Open: 'vscode.open' as BuiltInCommands,
     SetContext: 'setContext' as BuiltInCommands
 };
+
+export class ConfigurationKeys  {
+    public static readonly Section = 'Virtual Workspace';
+    public static readonly RembemerLastOpenDialogLocation = 'remember_last_open_dialog_location';
+    public static readonly OverrideOpenDialogLocation = 'override_open_dialog_location';
+}

@@ -4,7 +4,7 @@
 	"description": "Group unrelated files together in virtual workspaces",
 	"publisher": "VolcanicBytes",
 	"icon": "media/icon_256.png",
-	"version": "0.0.2",
+	"version": "1.0.0",
 	"repository": {
 		"url": "https://github.com/VolcanicBytes/virtualWorkspace",
 		"type": "git"
@@ -80,6 +80,22 @@
 					"code-virtualspace",
 					"code-virtualworkspace"
 				]
+			}
+		],
+		"configuration": [
+			{
+				"title": "Virtual Workspace",
+				"properties": {
+					"virtualWorkspace.remember_last_open_dialog_location": {
+						"type": "boolean",
+						"default": true,
+						"description": "Remember last open location"
+					},
+					"virtualWorkspace.override_open_dialog_location": {
+						"type": "string",
+						"description": "If set, the extension will always open dialogs in this location"
+					}
+				}
 			}
 		]
 	},

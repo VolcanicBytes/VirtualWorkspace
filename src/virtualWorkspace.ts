@@ -9,7 +9,7 @@ import { Watchdog } from './watchdog';
 
 export class VirtualWorkspace {
 
-    private destinationPath: string = "";
+    public destinationPath: string = "";
     private dataAccess: DataAccessLayer = new DataAccessLayer();
     private additionBox: AdditionBoxProxy;
     private documentInfoList: DocumentInfo[] = new Array<DocumentInfo>();
@@ -37,7 +37,7 @@ export class VirtualWorkspace {
             const doc = textEditor.document;
             if (doc == undefined || doc.uri.scheme !== 'file' || doc.languageId !== Constants.VirtualWorkspace)
                 return;
-            await this.Restore(doc.uri.fsPath);
+            await this.Restore(null, doc.uri.fsPath);
         } catch (error) {
             console.error(error);
         }
@@ -46,10 +46,10 @@ export class VirtualWorkspace {
     /**
      * SaveAs
      */
-    public async BeginSaveAs() {
-        const fileName = await this.dataAccess.showSaveDialog();
+    public async BeginSaveAs(folderPath: string | null): Promise<boolean> {
+        const fileName = await this.dataAccess.showSaveDialog(folderPath);
         if (!fileName)
-            return;
+            return false;
         this.destinationPath = fileName;
 
         this.ResetData();
@@ -58,6 +58,7 @@ export class VirtualWorkspace {
         StatusBar.DisplaySaveProgress();
         this.reTriggerWatchdog.Reset();
         await vscode.commands.executeCommand('workbench.action.firstEditorInGroup');
+        return true;
     }
 
 
@@ -75,20 +76,26 @@ export class VirtualWorkspace {
     /**
      * Restore
      */
-    public async Restore(fileName?: string) {
-
-        await vscode.commands.executeCommand(Constants.CloseAllEditorCommand);
+    public async Restore(folderName: string | null, fileName?: string): Promise<boolean> {
 
         if (!fileName)
-            fileName = await this.dataAccess.showOpenDialog();
+            fileName = await this.dataAccess.showOpenDialog(folderName);
+
         if (!fileName)
-            return;
+            return false;
+
+        try {
+            await vscode.commands.executeCommand(Constants.CloseAllEditorCommand);
+        } catch (error) {
+            console.error(error);
+        }
+
         this.destinationPath = fileName;
         this.ResetData();
         const unfilteredList = this.documentInfoList = this.dataAccess.RestoreDocumentInfoList(this.destinationPath);
 
         if (!await this.AskAndApplyUserFilter())
-            return;
+            return false;
 
         StatusBar.DisplayRestoreProgress();
         const textEditorListCount = this.documentInfoList.length;
@@ -106,6 +113,7 @@ export class VirtualWorkspace {
         StatusBar.Hide();
         this.additionBox.DisplayRestoredList(this.openEditorNames);
         vscode.commands.executeCommand('setContext', Constants.ContextIsOpen, true);
+        return true;
     }
 
     public async AskAndApplyUserFilter() {

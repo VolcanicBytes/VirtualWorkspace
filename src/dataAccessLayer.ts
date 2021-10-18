@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { window } from 'vscode';
+import { OpenDialogOptions, SaveDialogOptions, Uri, window } from 'vscode';
 import { Constants } from './constants';
 import { DocumentInfo } from "./model/documentInfo";
 import { DocumentInfoSerializer } from './model/documentInfoSerializer';
@@ -48,15 +48,39 @@ export class DataAccessLayer {
             fs.writeFileSync(path!, DocumentInfoSerializer.Serialize(list));
     }
 
-    public async showOpenDialog() {
-        const fileNames = await window.showOpenDialog({ openLabel: Constants.RestoreVirtualWorkspaceLabel, filters: { 'virtualWorkspace': [Constants.Extension, Constants.OldExtension] } });
+    public async showOpenDialog(folderPath: string | null) {
+        var defaultUri: Uri | undefined;
+
+        if (folderPath)
+            defaultUri = Uri.file(folderPath);
+
+        const options: OpenDialogOptions = {
+            openLabel: Constants.RestoreVirtualWorkspaceLabel,
+            filters: { 'virtualWorkspace': [Constants.Extension, Constants.OldExtension] },
+        };
+        if (defaultUri)
+            options.defaultUri = defaultUri;
+
+        const fileNames = await window.showOpenDialog(options);
         if (!fileNames)
             return undefined;
         return fileNames[0].fsPath;
     }
 
-    public async showSaveDialog() {
-        const fileNames = await window.showSaveDialog({ saveLabel: Constants.SaveVirtualWorkspaceLabel, filters: { 'virtualWorkspace': [Constants.Extension] } });
+    public async showSaveDialog(folderPath: string | null) {
+        var defaultUri: Uri | undefined;
+
+        if (folderPath)
+            defaultUri = Uri.file(folderPath);
+
+        const options: SaveDialogOptions = {
+            saveLabel: Constants.SaveVirtualWorkspaceLabel,
+            filters: { 'virtualWorkspace': [Constants.Extension] },
+        };
+        if (defaultUri)
+            options.defaultUri = defaultUri;
+
+        const fileNames = await window.showSaveDialog(options);
         return fileNames ? fileNames.fsPath : undefined;
     }
 }
